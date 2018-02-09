@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-	typeof define === 'function' && define.amd ? define(['exports'], factory) :
-	(factory((global.dbUtils = {})));
-}(this, (function (exports) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('../../../src/throtte.js'), require('../../../src/deepClone.js')) :
+	typeof define === 'function' && define.amd ? define(['exports', '../../../src/throtte.js', '../../../src/deepClone.js'], factory) :
+	(factory((global.dbUtils = {}),global.throtte_js,global.deepClone_js));
+}(this, (function (exports,throtte_js,deepClone_js) { 'use strict';
 
 // 交换数组中元素位置
 function swap(arr, index1, index2) {
@@ -70,11 +70,21 @@ function ago(time) {
   }
 }
 
+function log() {
+  console.log.apply(console, arguments);
+}
+
 const utils = {
   // array.js
   swap, unique, newArray,
   // date.js
-  formatDate, duration, ago
+  formatDate, duration, ago,
+  // debug.js
+  log,
+  // throtte.js
+  throtte: throtte_js.throtte, debounce: throtte_js.debounce,
+  // deepClone.js
+  deepClone: deepClone_js.deepClone
 };
 
 exports.default = utils;
@@ -84,6 +94,10 @@ exports.newArray = newArray;
 exports.formatDate = formatDate;
 exports.duration = duration;
 exports.ago = ago;
+exports.log = log;
+exports.throtte = throtte_js.throtte;
+exports.debounce = throtte_js.debounce;
+exports.deepClone = deepClone_js.deepClone;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

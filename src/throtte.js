@@ -47,4 +47,4 @@ export function debounce (fn, waitTime, immediate) {
   return throttle(fn, waitTime, immediate, true)
 }
 
-export default { throttle, debounce }
+export default { throtte, debounce }

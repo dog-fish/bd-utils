@@ -5,7 +5,11 @@ import replace from 'rollup-plugin-replace'
 import uglify from 'rollup-plugin-uglify'
 
 let plugins = [
-  resolve(),
+  resolve({
+    browser: true,
+    extensions: [ '.js', '.json' ],
+    modulesOnly: true,
+  }),
   commonjs(),
   babel({
     exclude: 'node_modules/**',

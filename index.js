@@ -1,6 +1,6 @@
 import { swap, unique, newArray } from './src/array.js'
 import { formatDate, duration, ago } from './src/date.js'
-import { log } from './src/debug.js'
+import { log } from './src/log.js'
 import { throtte, debounce } from '/src/throtte.js'
 import { deepClone } from '/src/deepClone.js'
 
@@ -10,11 +10,11 @@ const utils = {
   // date.js
   formatDate, duration, ago,
   // debug.js
-  log
+  log,
   // throtte.js
-  throtte, debounce
+  throtte, debounce,
   // deepClone.js
-  deepClone
+  deepClone,
 }
 
 export default utils
