@@ -8,7 +8,6 @@ let plugins = [
   resolve({
     browser: true,
     extensions: [ '.js', '.json' ],
-    modulesOnly: true,
   }),
   commonjs(),
   babel({
@@ -30,8 +29,9 @@ export default {
   input: 'index.js',
   output: {
     file: 'dist/index.js',
+    external: [ 'fs' ],
     format: 'umd',
-    name: 'dbUtils', // 生成UMD模块的名字
+    name: 'bdUtils', // 生成UMD模块的名字
     exports: 'named', // 导出模式，在导出多个时候使用
   },
   plugins: plugins,

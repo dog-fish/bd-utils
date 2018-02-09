@@ -1,5 +1,5 @@
 // 节流函数，指定时间执行一次
-export function throttle (fn, waitTime, immediate, isDebounce) {
+export function throtte (fn, waitTime, immediate, isDebounce) {
   let timer = null
   let lastTime = 0 // last execute time
 
@@ -44,7 +44,7 @@ export function throttle (fn, waitTime, immediate, isDebounce) {
 
 // 防抖函数，到达指定时间间隔执行
 export function debounce (fn, waitTime, immediate) {
-  return throttle(fn, waitTime, immediate, true)
+  return throtte(fn, waitTime, immediate, true)
 }
 
 export default { throtte, debounce }
