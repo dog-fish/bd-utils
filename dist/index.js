@@ -1,8 +1,8 @@
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('../../../src/throttle.js'), require('../../../src/clone.js')) :
-	typeof define === 'function' && define.amd ? define(['exports', '../../../src/throttle.js', '../../../src/clone.js'], factory) :
-	(factory((global.bdUtils = {}),global.throttle_js,global.clone_js));
-}(this, (function (exports,throttle_js,clone_js) { 'use strict';
+	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+	typeof define === 'function' && define.amd ? define(['exports'], factory) :
+	(factory((global.bdUtils = {})));
+}(this, (function (exports) { 'use strict';
 
 // 交换数组中元素位置
 function swap(arr, index1, index2) {
@@ -70,15 +70,83 @@ function ago(time) {
   }
 }
 
+// 对象和数组的深拷贝
+function deepClone(source) {
+  if (!source && typeof source !== 'object') {
+    throw new Error('error arguments', 'shallowClone');
+  }
+  const targetObj = source.constructor === Array ? [] : {};
+  for (const keys in source) {
+    if (source.hasOwnProperty(keys)) {
+      if (source[keys] && typeof source[keys] === 'object') {
+        targetObj[keys] = source[keys].constructor === Array ? [] : {};
+        targetObj[keys] = deepClone(source[keys]);
+      } else {
+        targetObj[keys] = source[keys];
+      }
+    }
+  }
+  return targetObj;
+}
+
+// 节流函数，指定时间执行一次
+function throttle(fn, waitTime, immediate, isDebounce) {
+  let timer = null;
+  let lastTime = 0; // last execute time
+
+  return function () {
+    function exec() {
+      lastTime = +new Date();
+      fn.apply(context, args);
+    }
+
+    function clear() {
+      timer = null;
+    }
+
+    let context = this;
+    let args = arguments;
+    let nowTime = +new Date();
+    let passTime = nowTime - lastTime;
+
+    if (isDebounce && !timer) {
+      exec();
+    }
+
+    if (timer) {
+      clearTimeout(timer);
+    }
+
+    if (immediate && !timer) {
+      exec();
+    }
+
+    if (!isDebounce && passTime > waitTime) {
+      exec();
+    } else {
+      if (isDebounce) {
+        timer = setTimeout(clear, waitTime);
+      } else {
+        timer = setTimeout(exec, waitTime - passTime);
+      }
+    }
+  };
+}
+
+// 防抖函数，到达指定时间间隔执行
+function debounce(fn, waitTime, immediate) {
+  return throttle(fn, waitTime, immediate, true);
+}
+
 const utils = {
   // array.js
   swap, unique, newArray,
   // date.js
   formatDate, duration, ago,
+  // clone.js
+  deepClone,
   // throtte.js
-  throtte: throttle_js.throtte, debounce: throttle_js.debounce,
-  // deepClone.js
-  deepClone: clone_js.deepClone
+  throttle, debounce
 };
 
 exports.default = utils;
@@ -88,9 +156,9 @@ exports.newArray = newArray;
 exports.formatDate = formatDate;
 exports.duration = duration;
 exports.ago = ago;
-exports.throtte = throttle_js.throtte;
-exports.debounce = throttle_js.debounce;
-exports.deepClone = clone_js.deepClone;
+exports.deepClone = deepClone;
+exports.throttle = throttle;
+exports.debounce = debounce;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

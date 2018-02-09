@@ -5,10 +5,7 @@ import replace from 'rollup-plugin-replace'
 import uglify from 'rollup-plugin-uglify'
 
 let plugins = [
-  resolve({
-    browser: true,
-    extensions: [ '.js', '.json' ],
-  }),
+  resolve(),
   commonjs(),
   babel({
     exclude: 'node_modules/**',
@@ -29,7 +26,6 @@ export default {
   input: 'index.js',
   output: {
     file: 'dist/index.js',
-    external: [ 'fs' ],
     format: 'umd',
     name: 'bdUtils', // 生成UMD模块的名字
     exports: 'named', // 导出模式，在导出多个时候使用
