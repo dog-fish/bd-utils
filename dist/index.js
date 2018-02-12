@@ -138,6 +138,38 @@ function debounce(fn, waitTime, immediate) {
   return throttle(fn, waitTime, immediate, true);
 }
 
+// 获取带字符串的字节长度
+function getByteLen(val) {
+  let len = 0;
+  for (let i = 0; i < val.length; i++) {
+    let a = val.charAt(i);
+    if (a > 127 || a === 94) {
+      len += 2;
+    } else {
+      len += 1;
+    }
+  }
+  return len;
+}
+// 获取url中的 query 的参数和值存放在一个对象中。
+function getQueryObj(str) {
+  var s = str.split('?');
+  var s1 = s[1].split('=');
+  var a = String(s1);
+  var s2 = a.split('&');
+  var s3 = String(s2);
+  var s4 = s3.split(',');
+  var obj = {};
+  for (var i = 0; i < s4.length - 1; i++) {
+    if (i % 2 == 0) {
+      var l = s4[i];
+      var n = s4[i + 1];
+      obj[l] = n;
+    }
+  }
+  return obj;
+}
+
 const utils = {
   // array.js
   swap, unique, newArray,
@@ -146,7 +178,9 @@ const utils = {
   // clone.js
   deepClone,
   // throtte.js
-  throttle, debounce
+  throttle, debounce,
+  // string.js
+  getByteLen, getQueryObj
 };
 
 exports.default = utils;
@@ -159,6 +193,8 @@ exports.ago = ago;
 exports.deepClone = deepClone;
 exports.throttle = throttle;
 exports.debounce = debounce;
+exports.getByteLen = getByteLen;
+exports.getQueryObj = getQueryObj;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 

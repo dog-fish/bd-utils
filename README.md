@@ -50,3 +50,12 @@ console.log(obj2) // { a: 3, b: { c: 2 } }
 * swap
 * unique
 * newArray
+
+#### storage.js
+* storageSet
+* storageGet
+* storageClear
+* storageLength
+* storageGetAll
+* storageKeys
+* storageHas
