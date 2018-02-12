@@ -170,6 +170,75 @@ function getQueryObj(str) {
   return obj;
 }
 
+function storageGet(key) {
+  if (key) {
+    let value = localStorage.getItem(key) || undefined;
+    try {
+      return JSON.parse(localStorage.getItem(key));
+    } catch (error) {
+      return value || undefined;
+    }
+  } else {
+    // equal to getAll()
+    let ret = {};
+    this.forEach((key, value) => {
+      ret[key] = value;
+    });
+    return ret;
+  }
+}
+
+function storageSet(key, value) {
+  value = JSON.stringify(value);
+  localStorage.setItem(key, value);
+  return this.get(key);
+}
+
+
+
+function storageClear() {
+  localStorage.clear();
+}
+
+function storageLength() {
+  return localStorage.length;
+}
+
+function forEach(callback) {
+  if (typeof callback !== 'function') return;
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    let value = this.get(key);
+    callback(key, value);
+  }
+}
+
+function storageGetAll() {
+  let ret = {};
+  this.forEach((key, value) => {
+    ret[key] = value;
+  });
+  return ret;
+}
+
+function storageKeys() {
+  let ret = [];
+  this.forEach((key, value) => {
+    ret.push(key);
+  });
+  return ret;
+}
+
+function storageHas(key) {
+  let keys = this.keys();
+  for (let i = 0; i < keys.length; i++) {
+    if (key === keys[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
 const utils = {
   // array.js
   swap, unique, newArray,
@@ -180,7 +249,9 @@ const utils = {
   // throtte.js
   throttle, debounce,
   // string.js
-  getByteLen, getQueryObj
+  getByteLen, getQueryObj,
+  // storage.js
+  storageSet, storageGet, storageClear, storageLength, storageGetAll, storageKeys, storageHas, forEach
 };
 
 exports.default = utils;
@@ -195,6 +266,14 @@ exports.throttle = throttle;
 exports.debounce = debounce;
 exports.getByteLen = getByteLen;
 exports.getQueryObj = getQueryObj;
+exports.storageSet = storageSet;
+exports.storageGet = storageGet;
+exports.storageClear = storageClear;
+exports.storageLength = storageLength;
+exports.storageGetAll = storageGetAll;
+exports.storageKeys = storageKeys;
+exports.storageHas = storageHas;
+exports.forEach = forEach;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
