@@ -1,6 +1,6 @@
 {
   "name": "bd-utils",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "'my javaScript tools'",
   "repository": "git@github.com:dog-fish/db-utils.git",
   "main": "bundle-2.js",

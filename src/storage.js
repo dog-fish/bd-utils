@@ -34,7 +34,7 @@ export function storageLength() {
   return localStorage.length
 }
 
-export function forEach(callback) {
+function forEach(callback) {
   if (typeof callback !== 'function') return
   for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i)
@@ -69,4 +69,4 @@ export function storageHas(key) {
   return false
 }
 
-export default { storageSet, storageGet, storageClear, storageLength, storageGetAll, storageKeys, storageHas, forEach }
+export default { storageSet, storageGet, storageClear, storageLength, storageGetAll, storageKeys, storageHas }

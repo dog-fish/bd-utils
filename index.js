@@ -3,7 +3,7 @@ import { formatDate, duration, ago } from './src/date.js'
 import { deepClone } from './src/clone.js'
 import { throttle, debounce } from './src/throtte.js'
 import { getByteLen, getQueryObj } from './src/string.js'
-import { storageSet, storageGet, storageClear, storageLength, storageGetAll, storageKeys, storageHas, forEach } from './src/storage.js'
+import { storageSet, storageGet, storageClear, storageLength, storageGetAll, storageKeys, storageHas, } from './src/storage.js'
 
 const utils = {
   // array.js
@@ -17,7 +17,7 @@ const utils = {
   // string.js
   getByteLen, getQueryObj,
   // storage.js
-  storageSet, storageGet, storageClear, storageLength, storageGetAll, storageKeys, storageHas, forEach
+  storageSet, storageGet, storageClear, storageLength, storageGetAll, storageKeys, storageHas,
 }
 
 export default utils
@@ -27,5 +27,5 @@ export {
   deepClone,
   throttle, debounce,
   getByteLen,getQueryObj,
-  storageSet, storageGet, storageClear, storageLength, storageGetAll, storageKeys, storageHas, forEach,
+  storageSet, storageGet, storageClear, storageLength, storageGetAll, storageKeys, storageHas,
 }
