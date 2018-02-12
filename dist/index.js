@@ -204,15 +204,6 @@ function storageLength() {
   return localStorage.length;
 }
 
-function forEach(callback) {
-  if (typeof callback !== 'function') return;
-  for (let i = 0; i < localStorage.length; i++) {
-    let key = localStorage.key(i);
-    let value = this.get(key);
-    callback(key, value);
-  }
-}
-
 function storageGetAll() {
   let ret = {};
   this.forEach((key, value) => {
@@ -251,7 +242,7 @@ const utils = {
   // string.js
   getByteLen, getQueryObj,
   // storage.js
-  storageSet, storageGet, storageClear, storageLength, storageGetAll, storageKeys, storageHas, forEach
+  storageSet, storageGet, storageClear, storageLength, storageGetAll, storageKeys, storageHas
 };
 
 exports.default = utils;
@@ -273,7 +264,6 @@ exports.storageLength = storageLength;
 exports.storageGetAll = storageGetAll;
 exports.storageKeys = storageKeys;
 exports.storageHas = storageHas;
-exports.forEach = forEach;
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
